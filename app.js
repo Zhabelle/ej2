@@ -65,11 +65,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',(req,res)=>{
+    let datos=data;
     if(req.query.speciesname)
-        return res.send(data.filter(a=>a.speciesname.toUpperCase()==req.query.speciesname.toUpperCase()));
+        datos=datos.filter(a=>a.speciesname.toUpperCase()==req.query.speciesname.toUpperCase());
     if(req.query.intakereason)
-        return res.send(data.filter(a=>a.intakereason.toUpperCase()==req.query.intakereason.toUpperCase()));
-    res.send(data);
+        datos=datos.filter(a=>a.intakereason.toUpperCase()==req.query.intakereason.toUpperCase());
+    res.send(datos);
 });
 
 app.get('/:id',(req,res)=>{
